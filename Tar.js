@@ -11,7 +11,7 @@ class Ingredient {
       "<div class='card' style='background-image: url(" +
       this.image +
       ");'>" +
-      "<h5>Ingredient details: </h5>" +
+      "<h1>Ingredient details: </h1>" +
       "<div class='info'>" +
       "<p class='description'>" +
       "<h1 class='title'>" +
@@ -96,7 +96,7 @@ var dishJson = [
       },
     ],
     time: "35",
-    cookingMethod: "hi",
+    cookingMethod: "Grilling",
     image:
       "https://www.aspicyperspective.com/wp-content/uploads/2020/07/best-hamburger-patties-1.jpg",
   },
@@ -126,7 +126,9 @@ function init() {
       dish.name +
       "' value='" +
       dish.name +
-      "' onclick='getIngredients(event)'><span> Show ingredients </span><i></i></button>";
+      "' onclick='getIngredients(event)'><span id='" +
+      dish.name +
+      "'> Show ingredients </span><i></i></button>";
     str += "</div>";
     str += "</div>";
   }
@@ -213,6 +215,7 @@ function getIngredients(e) {
   elIng = document.getElementById("showIngredients");
   elDetails = document.getElementById("details");
   dishName = e.target.id;
+  console.log(dishName);
   dishJson = JSON.parse(localStorage.getItem("dishJson") || "[]");
   let str = "";
   for (var i in dishJson) {
