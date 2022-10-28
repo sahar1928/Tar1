@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Raleway"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./checkBoxStyle.css" />
+    <link rel="stylesheet" href="./buttonStyle.css" />
+    <link rel="stylesheet" href="./submitStyle.css" />
+    <title>Saharz&Lidorz</title>
+  </head>
+  <body onload="init()">
+    <div class="bgimg w3-display-container w3-text-white">
+      <div class="w3-display-middle w3-jumbo">
+        <p>Saharz&Lidorz Restaurant</p>
+      </div>
+      <div class="w3-display-topleft w3-container w3-xlarge">
+        <p>
+          <button
+            onclick="document.getElementById('addIngredient').style.display='block'"
+          >
+          <span>Add new ingredient</span><i></i> 
+          </button>
+        </p>
+        <p>
+          <button
+            onclick="document.getElementById('addNewDish').style.display='block'"
+          >
+          <span>Add new recipe</span><i></i> 
+          </button>
+        </p>
+      </div>
+      <div class="w3-display-bottommiddle w3-container"></div>
+      <div id="container"></div>
+    </div>
+    <header><div><h1>Dishes </h1></div></header>
+    <div id="dishes"></div>
+    <!-- Ingredient Modal -->
+    <div id="addIngredient" class="w3-modal">
+      <div class="w3-modal-content w3-animate-zoom">
+        <div class="w3-container w3-black">
+          <span
+            onclick="document.getElementById('addIngredient').style.display='none'"
+            class="w3-button w3-display-topright w3-large"
+            >x</span
+          >
+          <h1>add ingredient</h1>
+        </div>
+        <div class="w3-container">
+          <form method="get" action="">
+            <div class="add">
+              <h1>add ingredient</h1>
+              <div>
+                <label>id</label>
+                <input
+                  type="text"
+                  class="w3-input w3-padding-8 w3-border"
+                  id="id"
+                /><br />
+              </div>
+              <div>
+                <label>name</label>
+                <input
+                  type="text"
+                  class="w3-input w3-padding-8 w3-border"
+                  id="name"
+                /><br />
+              </div>
+              <div>
+                <label>image</label>
+                <input
+                  type="text"
+                  class="w3-input w3-padding-8 w3-border"
+                  id="image"
+                /><br />
+              </div>
+              <div>
+                <label>calories</label>
+                <input
+                  type="text"
+                  class="w3-input w3-padding-8 w3-border"
+                  id="calories"
+                /><br />
+              </div>
+              <div>
+                <input
+                  class="submit"
+                  type="button"
+                  id="submit"
+                  onclick="submitIngredient()"
+                  value="SEND"
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!--Dishes Modal-->
+    <div id="addNewDish" class="w3-modal">
+      <div class="w3-modal-content w3-animate-zoom">
+        <div class="w3-container w3-black">
+          <span
+            onclick="document.getElementById('addNewDish').style.display='none'"
+            class="w3-button w3-display-topright w3-large"
+            >x</span
+          >
+          <h1>add new dishes</h1>
+        </div>
+        <div class="w3-container">
+          <form method="get" action="">
+            <div class="add">
+              <h1>add dish</h1>
+              <div>
+                <label>Name</label>
+                <input
+                  type="text"
+                  class="w3-input w3-padding-8 w3-border"
+                  id="dname"
+                  required
+                  name="Name"
+                /><br />
+              </div>
+              <div>
+                <label>cooking method</label>
+                <input
+                  type="text"
+                  class="w3-input w3-padding-8 w3-border"
+                  id="cookingMethod"
+                /><br />
+              </div>
+              <div>
+                <label>cooking time</label>
+                <input
+                  type="text"
+                  class="w3-input w3-padding-8 w3-border"
+                  id="cookingTime"
+                /><br />
+              </div>
+              <div>
+                <label>add dish image</label>
+                <input
+                  type="text"
+                  class="w3-input w3-padding-8 w3-border"
+                  id="dimage"
+                /><br />
+              </div>
+              <div id="ingredients">
+                <h3><p>Choose ingridents :</p></h3>
+              </div>
+              <div>
+                <input
+                  class="submit"
+                  type="button"
+                  id="newDish"
+                  onclick="submitDish()"
+                  value="SEND"
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Show Ingredient Modal -->
+    <div id="showIngredients" class="w3-modal">
+      <div class="w3-modal-content w3-animate-zoom">
+        <div class="w3-container w3-white">
+          <span
+            onclick='document.getElementById("showIngredients").style.display="none"'
+            class="w3-button w3-display-topright w3-large"
+            >x</span
+          >
+          <h1>ingredients details</h1>
+          <div id="details"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="Tar.js"></script>
+  <script src="https://code.jquery.com/jquery-1.8.2.js"></script>
+</html>
