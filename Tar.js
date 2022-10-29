@@ -26,7 +26,6 @@ class Ingredient {
 }
 
 class DishRecipe extends Ingredient {
-  static sumCalories = 0;
   constructor(name, time, cookingMethod, image) {
     super(name, id, image, calories);
     this.name = name;
@@ -68,8 +67,15 @@ class DishRecipe extends Ingredient {
 
 var ingredientJson = [
   {
-    id: 0,
-    name: "broccoli",
+    name: "Meat",
+    id: 1,
+    image:
+    "http://cdn.firstwefeast.com/assets/2014/08/texture.jpg",
+    calories: "165",
+  },
+  {
+    name: "Broccoli",
+    id: 2,
     image:
       "https://domf5oio6qrcr.cloudfront.net/medialibrary/5390/h1218g16207258089583.jpg",
     calories: 34,
@@ -82,17 +88,17 @@ var dishJson = [
     ingredients: [
       {
         name: "Meat",
-        id: "12",
+        id: "1",
         image:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7F_-nGYoF3C3G26h9nCCNLQV1-anCaM39gdMLwwcmPmFswmnhhmP5Qel3eFKOjRlEACA&usqp=CAU",
-        calories: "190",
+        "http://cdn.firstwefeast.com/assets/2014/08/texture.jpg",
+        calories: "165",
       },
       {
-        name: "Lettuce",
-        id: "13",
+        name: "Broccoli",
+        id: "2",
         image:
           "https://www.shefab.co.il/files/products/product90_image1_2020-08-30_18-13-31.jpg",
-        calories: "31",
+        calories: "34",
       },
     ],
     time: "35",
@@ -138,8 +144,8 @@ function init() {
 
 function submitIngredient() {
   var ing = new Ingredient();
-  ing.id = document.getElementById("id").value;
   ing.name = document.getElementById("name").value;
+  ing.id = JSON.parse(localStorage.getItem("ingredientJson")).length+1; 
   ing.image = document.getElementById("image").value;
   ing.calories = document.getElementById("calories").value;
 
@@ -236,3 +242,4 @@ function getIngredients(e) {
   elDetails.innerHTML = str;
   elIng.style.display = "block";
 }
+
