@@ -52,7 +52,8 @@ class DishRecipe extends Ingredient {
       "Total cooking time: " +
       this.time +
       "minutes " +
-      "</p>"
+      "</p>" +
+      "Total calories: " + this.getTotalCalories()
     );
   };
 
@@ -125,7 +126,6 @@ function init() {
     dish.time = dishJson[i].time;
     dish.cookingMethod = dishJson[i].cookingMethod;
     str += dish.render();
-    str += "Total calories: " + dish.getTotalCalories();
     str +=
       "<br>" +
       "<button id='" +
@@ -173,13 +173,13 @@ function submitDish() {
       elChecked &&
       ingredientJson.some((item) => JSON.stringify(item.name) == elIngredient)
     ) {
-      temp = new Ingredient(
+      ingredientObj = new Ingredient(
         ingredientJson[i].name,
         ingredientJson[i].id,
         ingredientJson[i].image,
         ingredientJson[i].calories
       );
-      dish.ingredients.push(temp);
+      dish.ingredients.push(ingredientObj);
     }
   }
   dishJson.push(dish);
@@ -193,19 +193,19 @@ function show() {
   let str = "";
   let counter = 0;
   for (var i in ingredientJson) {
-    temp = new Ingredient(
+    ingredientObj = new Ingredient(
       ingredientJson[i].name,
       ingredientJson[i].id,
       ingredientJson[i].image,
       ingredientJson[i].calories
     );
-    str += temp.render();
+    str += ingredientObj.render();
     str +=
       " <label class='toggler-wrapper style-20'>" +
       "  <input type='checkbox' id='" +
       JSON.stringify(counter++) +
       "' value='" +
-      JSON.stringify(temp.name) +
+      JSON.stringify(ingredientObj.name) +
       "'>" +
       "<div class='toggler-slider'>" +
       "<div class='toggler-knob'></div>" +
@@ -221,19 +221,18 @@ function getIngredients(e) {
   elIng = document.getElementById("showIngredients");
   elDetails = document.getElementById("details");
   dishName = e.target.id;
-  console.log(dishName);
   dishJson = JSON.parse(localStorage.getItem("dishJson") || "[]");
   let str = "";
   for (var i in dishJson) {
     if (dishJson[i].name == dishName) {
       for (var j in dishJson[i].ingredients) {
-        temp = new Ingredient(
+        ingredientObj = new Ingredient(
           dishJson[i].ingredients[j].name,
           dishJson[i].ingredients[j].id,
           dishJson[i].ingredients[j].image,
           dishJson[i].ingredients[j].calories
         );
-        str += temp.render();
+        str += ingredientObj.render();
         str += "</div>";
         str += "</div>";
       }
