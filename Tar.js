@@ -53,7 +53,8 @@ class DishRecipe extends Ingredient {
       this.time +
       "minutes " +
       "</p>" +
-      "Total calories: " + this.getTotalCalories()
+      "Total calories: " +
+      this.getTotalCalories()
     );
   };
 
@@ -70,8 +71,7 @@ var ingredientJson = [
   {
     name: "Meat",
     id: 1,
-    image:
-    "http://cdn.firstwefeast.com/assets/2014/08/texture.jpg",
+    image: "http://cdn.firstwefeast.com/assets/2014/08/texture.jpg",
     calories: "165",
   },
   {
@@ -90,8 +90,7 @@ var dishJson = [
       {
         name: "Meat",
         id: "1",
-        image:
-        "http://cdn.firstwefeast.com/assets/2014/08/texture.jpg",
+        image: "http://cdn.firstwefeast.com/assets/2014/08/texture.jpg",
         calories: "165",
       },
       {
@@ -144,10 +143,14 @@ function init() {
 
 function submitIngredient() {
   var ing = new Ingredient();
-  ing.name = document.getElementById("name").value;
-  ing.id = JSON.parse(localStorage.getItem("ingredientJson")).length+1; 
-  ing.image = document.getElementById("image").value;
-  ing.calories = document.getElementById("calories").value;
+  if (checkChar(document.getElementById("name").value)) {
+    if (checkNum(document.getElementById("calories").value)) {
+      ing.name = document.getElementById("name").value;
+      ing.id = JSON.parse(localStorage.getItem("ingredientJson")).length + 1;
+      ing.image = document.getElementById("image").value;
+      ing.calories = document.getElementById("calories").value;
+    } else return;
+  } else return;
 
   ingredientJson.push(ing);
   localStorage.setItem("ingredientJson", JSON.stringify(ingredientJson));
@@ -161,10 +164,16 @@ function submitDish() {
   }
   ingredientJson = JSON.parse(localStorage.getItem("ingredientJson") || "[]");
   var dish = new DishRecipe();
-  dish.name = document.getElementById("dname").value;
-  dish.cookingMethod = document.getElementById("cookingMethod").value;
-  dish.time = document.getElementById("cookingTime").value;
-  dish.image = document.getElementById("dimage").value;
+  if (checkChar(document.getElementById("dname").value)) {
+    if (checkChar(document.getElementById("cookingMethod").value)) {
+      if (checkNum(document.getElementById("cookingTime").value)) {
+        dish.name = document.getElementById("dname").value;
+        dish.cookingMethod = document.getElementById("cookingMethod").value;
+        dish.time = document.getElementById("cookingTime").value;
+        dish.image = document.getElementById("dimage").value;
+      } else return;
+    } else return;
+  } else return;
 
   for (var i in ingredientJson) {
     elIngredient = document.getElementById(i).value;
@@ -242,3 +251,30 @@ function getIngredients(e) {
   elIng.style.display = "block";
 }
 
+function checkChar(value) {
+  if (!/[^a-z]/i.test(value)) {
+    return true;
+  } else {
+    swal({
+      icon: "error",
+      title: "ERROR",
+      text: "Enter a name/cooking method with alphabets only ",
+      button: "close",
+    });
+    return false;
+  }
+}
+
+function checkNum(value) {
+  if (/^\d+$/.test(value)) {
+    return true;
+  } else {
+    swal({
+      icon: "error",
+      title: "ERROR",
+      text: "Enter calories/cooking time with digits only  ",
+      button: "close",
+    });
+    return false;
+  }
+}
